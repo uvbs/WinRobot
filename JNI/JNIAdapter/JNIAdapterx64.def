@@ -1,0 +1,32 @@
+LIBRARY   JNIAdapterx64
+EXPORTS
+
+Java_com_caoym_WinRobot_createScreenCaptureAsFileMapping @2
+Java_com_caoym_WinRobot_delay @3
+Java_com_caoym_WinRobot_getAutoDelay @4
+Java_com_caoym_WinRobot_getPixelColor @5
+Java_com_caoym_WinRobot_isAutoWaitForIdle @6
+Java_com_caoym_WinRobot_keyPress @7
+Java_com_caoym_WinRobot_keyRelease @8
+Java_com_caoym_WinRobot_mouseMove @9
+Java_com_caoym_WinRobot_mousePress @10
+Java_com_caoym_WinRobot_mouseRelease @11
+Java_com_caoym_WinRobot_mouseWheel @12
+Java_com_caoym_WinRobot_setAutoDelay @13
+Java_com_caoym_WinRobot_setAutoWaitForIdle @14
+Java_com_caoym_WinRobot_toString @15
+Java_com_caoym_WinRobot_waitForIdle @16
+Java_com_caoym_WinRobot_captureMouseCursorAsFileMapping @18
+Java_com_caoym_WinRobot_keyType @19
+Java_com_caoym_WinRobot_sendCtrlAltDel @20
+Java_com_caoym_WinRobot_CreateJNIObj @21
+Java_com_caoym_WinRobot_DestroyJNIObj @22
+Java_com_caoym_WinFileMappingBuffer_open @23
+Java_com_caoym_WinFileMappingBuffer_getBuffer @24
+Java_com_caoym_WinFileMappingBuffer_CreateJNIObj @25
+Java_com_caoym_WinFileMappingBuffer_DestroyJNIObj @26
+Java_com_caoym_WinRobot_setKeyboardLayout @27
+Java_com_caoym_WinFileMappingBuffer_close @28
+ 
+
+

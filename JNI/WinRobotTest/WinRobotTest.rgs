@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'WinRobotTest'
+		'WinRobotTest.EXE'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

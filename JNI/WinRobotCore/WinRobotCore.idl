@@ -1,0 +1,232 @@
+// WinRobotCore.idl : IDL source for WinRobotCore
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (WinRobotCore.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(9AB9A753-B8A3-4E01-AC4B-995B4B34EF13),
+	dual,
+	nonextensible,
+	helpstring("IWinRobotSession Interface"),
+	pointer_default(unique)
+]
+/**
+ * A IWinRobotSession is an interface that provide methods to input events and capture images in a Windows Session
+ **/
+interface IWinRobotSession : IDispatch{
+	/**
+	 * Creates an image containing pixels read from the screen.
+	 * @param nX Specifies the logical x-coordinate of the upper-left corner of the source rectangle.
+	 * @param nY Specifies the logical y-coordinate of the upper-left corner of the source rectangle.
+	 * @param nWidth Specifies the width (in logical units) of the source rectangle.
+	 * @param nHeight Specifies the height (in logical units) of the source rectangle.
+	 * @param Address of pointer variable that receives the IScreenBufferStream interface pointer. Upon successful return, *ppBufferedImage contains the requested interface pointer.
+	 * @return S_OK if succeeded
+	 */
+	[id(1), helpstring("CreateScreenCapture")] HRESULT CreateScreenCapture([in] LONG nX, [in] LONG nY, [in] LONG nWidth, [in] LONG nHeight, [out,retval] IUnknown** ppBufferedImage);
+	/**
+	 * Sleeps for the specified time
+	 * @param ms time to sleep in milliseconds
+	 * @return S_OK if succeeded
+	 */
+	[id(2), helpstring("Delay")] HRESULT Delay([in] ULONG ms);
+	/**
+	 * Gets the number of milliseconds it sleeps after generating an event.
+	 * @return S_OK if succeeded
+	 */
+	[propget, id(3), helpstring("AutoDelay")] HRESULT AutoDelay([out, retval] ULONG* pVal);
+	/**
+	 * Sets the number of milliseconds it sleeps after generating an event
+	 * @return S_OK if succeeded
+	 */
+	[propput, id(3), helpstring("AutoDelay")] HRESULT AutoDelay([in] ULONG newVal);
+	/**
+	 * Gets the color of a pixel at the given screen coordinates.
+	 * @param x X position of pixel
+	 * @param y Y position of pixel
+	 * @param color Output color of the pixel
+	 * @return S_OK if succeeded
+	 */
+	[id(4), helpstring("GetPixelColor")] HRESULT GetPixelColor([in] LONG x, [in] LONG y, [out,retval] OLE_COLOR* color);
+	/**
+	 * Gets whether it automatically invokes WaitForIdle after generating an event. 
+	 * @return S_OK if succeeded
+	 */
+	[propget, id(5), helpstring("AutoWaitForIdle")] HRESULT AutoWaitForIdle([out, retval] VARIANT_BOOL* pVal);
+	/**
+	 * Sets whether it automatically invokes WaitForIdle after generating an event. 
+	 * @return S_OK if succeeded
+	 */
+	[propput, id(5), helpstring("AutoWaitForIdle")] HRESULT AutoWaitForIdle([in] VARIANT_BOOL newVal);
+	/**
+	 * Waits until all events currently on the event queue have been processed.
+	 * @return S_OK if succeeded
+	 */
+	[id(6), helpstring("WaitForIdle")] HRESULT WaitForIdle(void);
+	/**
+	 * Presses a given key.
+	 * @param keycode the given key(VK_*).
+	 */
+	[id(7), helpstring("KeyPress")] HRESULT KeyPress([in] ULONG keycode);
+	/**
+	 * Releases a given key.
+	 * @param keycode the given key(VK_*).
+	 */
+	[id(8), helpstring("KeyRelease")] HRESULT KeyRelease([in] ULONG keycode);
+	/**
+	 * Moves mouse pointer to given screen coordinates. 
+	 * @param x X position
+	 * @param y Y position
+	 */
+	[id(9), helpstring("MouseMove")] HRESULT MouseMove([in] LONG x,[in] LONG y);
+	/**
+	 * Presses one or more mouse buttons. 
+	 * @param buttons \see InputEvent
+	 */
+	[id(10), helpstring("MousePress")] HRESULT MousePress([in] ULONG buttons);
+	/**
+	 * Releases one or more mouse buttons. 
+	 * @param buttons \see InputEvent
+	 */
+	[id(11), helpstring("MouseRelease")] HRESULT MouseRelease([in] ULONG buttons);
+	/**
+	 * Rotates the scroll wheel on wheel-equipped mice. 
+	 * @param wheelAmt number of "notches" to move the mouse wheel Negative values indicate movement up/away from the user, positive values indicate movement down/towards the user.
+	 */
+	[id(12), helpstring("MouseWheel")] HRESULT MouseWheel([in] LONG wheelAmt);
+	/**
+     * capture mouse cursor
+     * @param x Output X position of the mouse cursor
+	 * @param y Output Y position of the mouse cursor
+     * @param hotx Output X position of hotspot of the mouse cursor
+     * @param hoty Output Y position of hotspot of the mouse cursor
+	 * @param type type of predefined cursor 
+     */
+	[id(13), helpstring("method CaptureMouseCursor")] HRESULT CaptureMouseCursor([out] LONG *x, [out] LONG* y, [out] LONG *hotx, [out] LONG *hoty,[out] LONG *type,[out, retval] IUnknown** pVal);
+	/**
+     * Send the supplied character as keyboard input as if the corresponding character was generated on the keyboard.
+     * \param uchar unicode char
+     */
+	[id(14), helpstring("method InputChar")] HRESULT InputChar([in] USHORT uchar);
+	/**
+     * Change keyboard layout of the input thread
+     * @param KLID KeyboardLayout id @see http://msdn.microsoft.com/en-us/library/ms646305(v=vs.85).aspx
+     */
+	[id(15), helpstring("method SetKeyboardLayout")] HRESULT SetKeyboardLayout([in] BSTR KLID);
+};
+[
+	object,
+	uuid(43CF023A-99C4-4867-AA3F-EA490CACE693),
+	dual,
+	nonextensible,
+	helpstring("IWinRobotService Interface"),
+	pointer_default(unique)
+]
+/**
+ * The IWinRobotService interface provide methods to manage IWinRobotSession objects. 
+ */
+interface IWinRobotService : IDispatch{
+	/**
+	 * receive the session currently attached to the physical console 
+	 * @param ppSession output a IWinRobotSession* pointer
+	 */
+	[id(1), helpstring("GetActiveConsoleSession")] HRESULT GetActiveConsoleSession([out,retval] IUnknown** ppSession);
+	/** 
+	 * register a IWinRobotSession object
+	 * @param sid session id
+	 * @param processid id of the WinRobotSession process 
+	 * @param pSession point to IWinRobotSession
+	 */
+	[id(2), helpstring("RegSession")] HRESULT RegSession([in] ULONG sid, [in] ULONG processid,[in] IUnknown* pSession);
+};
+[
+	object,
+	uuid(E4CC963A-2692-4A7A-8C73-D9DF7C47013A),
+	dual,
+	nonextensible,
+	helpstring("IScreenBufferStream Interface"),
+	pointer_default(unique)
+]
+/**
+ * The IScreenBufferStream interface lets you read and write data from stream objects. 
+ */
+interface IScreenBufferStream : IDispatch{
+		/**
+		 * Get storaged date size 
+		 */
+		[propget, id(1), helpstring("property Size")] HRESULT Size([out, retval] ULONG* pVal);
+		/**
+		 * Get storaged FileMapping object name 
+		 */
+		[propget, id(2), helpstring("property FileMappingName")] HRESULT FileMappingName([out, retval] BSTR* pVal);
+};
+[
+	uuid(2833AC19-456E-46CF-A8E8-A599FFC5DE1A),
+	version(1.0),
+	helpstring("WinRobotCore 1.0 Type Library")
+]
+library WinRobotCoreLib
+{
+	importlib("stdole2.tlb");
+	/**
+	 * The mouse button mask
+	 */
+	typedef [v1_enum] enum _InputEvent
+	{
+		BUTTON1_MASK = 16,	/**< left button */
+		BUTTON2_MASK = 8,	/**< middle button */
+		BUTTON3_MASK = 4,	/**< right button */
+	}InputEvent;
+	/**
+	 * predefined cursor type
+	 */
+	typedef [v1_enum] enum _CursorType{
+		CURSOR_APPSTARTING = 0,/**< Standard arrow and small hourglass*/
+		CURSOR_ARROW,/**< 		Standard arrow*/
+		CURSOR_CROSS,/**< 		Crosshair*/
+		CURSOR_HAND,/**< 		Windows 98/Me, Windows 2000/XP: Hand*/
+		CURSOR_HELP,/**< 		Arrow and question mark*/
+		CURSOR_IBEAM,/**< 		I-beam*/
+		CURSOR_ICON,/**< 		Obsolete for applications marked version 4.0 or later.*/
+		CURSOR_NO,/**< 		Slashed circle*/
+		CURSOR_SIZE,/**< 		Obsolete for applications marked version 4.0 or later. Use CURSOR_SIZEALL.*/
+		CURSOR_SIZEALL,/**< 		Four-pointed arrow pointing north, south, east, and west*/
+		CURSOR_SIZENESW,/**< 		Double-pointed arrow pointing northeast and southwest*/
+		CURSOR_SIZENS,/**< 		Double-pointed arrow pointing north and south*/
+		CURSOR_SIZENWSE,/**< 		Double-pointed arrow pointing northwest and southeast*/
+		CURSOR_SIZEWE,/**< 		Double-pointed arrow pointing west and east*/
+		CURSOR_UPARROW,/**< 		Vertical arrow*/
+		CURSOR_WAIT,/**< 		Hourglass*/
+		CURSOR_UNKNOWN = -1,/**< unknown cursor,not predefined  */
+	}CursorType;
+
+	[
+		uuid(80AD2243-BBC8-442B-AA55-14633E6FE17B),
+		helpstring("WinRobotSession Class")
+	]
+	coclass WinRobotSession
+	{
+		[default] interface IWinRobotSession;
+	};
+	[
+		uuid(D08018BD-6958-4A2E-95EA-FEC13211DA0F),
+		helpstring("WinRobotService Class")
+	]
+	coclass WinRobotService
+	{
+		[default] interface IWinRobotService;
+	};
+	[
+		uuid(C24870C2-8829-4BEF-BCBE-9064AB81599E),
+		helpstring("ScreenBufferStream Class")
+	]
+	coclass ScreenBufferStream
+	{
+		[default] interface IScreenBufferStream;
+	};
+};

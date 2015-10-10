@@ -1,0 +1,24 @@
+HKCR
+{
+	WinRobotHost.ServiceHost.1 = s 'ServiceHost Class'
+	{
+		CLSID = s '{9C9264E5-DEFB-46CC-B15E-9A848E3DEA6E}'
+	}
+	WinRobotHost.ServiceHost = s 'ServiceHost Class'
+	{
+		CLSID = s '{9C9264E5-DEFB-46CC-B15E-9A848E3DEA6E}'
+		CurVer = s 'WinRobotHost.ServiceHost.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {9C9264E5-DEFB-46CC-B15E-9A848E3DEA6E} = s 'ServiceHost Class'
+		{
+			ProgID = s 'WinRobotHost.ServiceHost.1'
+			VersionIndependentProgID = s 'WinRobotHost.ServiceHost'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{BFA732A6-DAC4-44D9-AA54-73487A188D94}'
+		}
+	}
+}

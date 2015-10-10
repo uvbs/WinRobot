@@ -1,0 +1,26 @@
+HKCR
+{
+	WinRobotCore.ScreenBufferStream.1 = s 'ScreenBufferStream Class'
+	{
+		CLSID = s '{C24870C2-8829-4BEF-BCBE-9064AB81599E}'
+	}
+	WinRobotCore.ScreenBufferStream = s 'ScreenBufferStream Class'
+	{
+		CLSID = s '{C24870C2-8829-4BEF-BCBE-9064AB81599E}'
+		CurVer = s 'WinRobotCore.ScreenBufferStream.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {C24870C2-8829-4BEF-BCBE-9064AB81599E} = s 'ScreenBufferStream Class'
+		{
+			ProgID = s 'WinRobotCore.ScreenBufferStream.1'
+			VersionIndependentProgID = s 'WinRobotCore.ScreenBufferStream'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			'TypeLib' = s '{2833AC19-456E-46CF-A8E8-A599FFC5DE1A}'
+		}
+	}
+}

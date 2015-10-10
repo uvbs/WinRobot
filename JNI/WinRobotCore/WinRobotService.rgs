@@ -1,0 +1,26 @@
+HKCR
+{
+	WinRobotCore.WinRobotService.1 = s 'WinRobotService Class'
+	{
+		CLSID = s '{D08018BD-6958-4A2E-95EA-FEC13211DA0F}'
+	}
+	WinRobotCore.WinRobotService = s 'WinRobotService Class'
+	{
+		CLSID = s '{D08018BD-6958-4A2E-95EA-FEC13211DA0F}'
+		CurVer = s 'WinRobotCore.WinRobotService.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {D08018BD-6958-4A2E-95EA-FEC13211DA0F} = s 'WinRobotService Class'
+		{
+			ProgID = s 'WinRobotCore.WinRobotService.1'
+			VersionIndependentProgID = s 'WinRobotCore.WinRobotService'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Free'
+			}
+			'TypeLib' = s '{2833AC19-456E-46CF-A8E8-A599FFC5DE1A}'
+		}
+	}
+}

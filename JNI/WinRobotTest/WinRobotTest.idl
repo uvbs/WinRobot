@@ -1,0 +1,14 @@
+
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	uuid(861A2145-6123-4055-BBED-598BB70314DE),
+	version(1.0),
+	helpstring("WinRobotTest 1.0 ")
+]
+library WinRobotTestLib
+{
+	importlib("stdole2.tlb");
+};

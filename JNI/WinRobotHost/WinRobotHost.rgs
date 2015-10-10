@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'WinRobotHost'
+		'%APP_NAME%'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

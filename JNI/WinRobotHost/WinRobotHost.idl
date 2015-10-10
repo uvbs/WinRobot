@@ -1,0 +1,39 @@
+// WinRobotHost.idl : IDL source for WinRobotHost
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (WinRobotHost.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(8074F360-D168-4D27-910D-1A177475184B),
+	dual,
+	nonextensible,
+	helpstring("IServiceHost Interface"),
+	pointer_default(unique)
+]
+/**
+ * Interface of ServiceHost
+ */
+interface IServiceHost : IDispatch{
+};
+[
+	uuid(BFA732A6-DAC4-44D9-AA54-73487A188D94),
+	version(1.0),
+	helpstring("WinRobotHost 1.0 Type Library")
+]
+library WinRobotHostLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(9C9264E5-DEFB-46CC-B15E-9A848E3DEA6E),
+		helpstring("ServiceHost Class")
+	]
+	coclass ServiceHost
+	{
+		[default] interface IServiceHost;
+	};
+};
